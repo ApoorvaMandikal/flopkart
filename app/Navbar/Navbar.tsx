@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 
 const Navbar = () => {
   return (
@@ -21,13 +21,13 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="Search..."
-            className="w-full p-2 rounded border border-gray-600 focus:outline-none focus:border-blue-500"
+            className="w-full p-2 border border-gray-600 focus:outline-none focus:border-blue-500"
           />
           <MagnifyingGlassIcon className="absolute text-blue-500 h-6 w-6 right-4 top-2" />
         </div>
 
         <div className="hidden sm:flex items-center mx-2 lg:mx-4">
-          <button className="bg-white text-blue-600 font-bold px-4 py-2 hover:bg-blue-600 hover:text-white w-24 sm:w-28 lg:w-32 h-8 flex items-center justify-center">
+          <button className="bg-white text-blue-500 font-bold px-4 py-2 hover:bg-blue-600 hover:text-white w-24 sm:w-28 lg:w-32 h-8 flex items-center justify-center">
             Login
           </button>
         </div>
@@ -41,9 +41,10 @@ const Navbar = () => {
           <ChevronDownIcon className="text-white h-4 w-4 ml-1" />
         </div>
 
-        <div className="hidden sm:flex items-center mx-2 lg:mx-4">
-          <button className="bg-green-500 px-3 py-2 rounded hover:bg-green-600">
-            Cart
+        <div className="sm:flex items-center mx-2 lg:mx-4 text-base font-semibold">
+          <button className="flex justify-between text-center px-3 py-2 ">
+            <ShoppingCartIcon className="text-white size-6 py-1"></ShoppingCartIcon>
+            <p>Cart</p>
           </button>
         </div>
       </div>
