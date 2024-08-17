@@ -42,10 +42,10 @@ const Navbar = () => {
         </div>
 
         <div className="sm:flex items-center mx-2 lg:mx-4 text-base font-semibold">
-          <button className="flex justify-between text-center px-3 py-2 ">
+          <Link href="/cart" className="flex justify-between text-center px-3 py-2 ">
             <ShoppingCartIcon className="text-white size-6 py-1"></ShoppingCartIcon>
             <p>Cart</p>
-          </button>
+          </Link>
         </div>
       </div>
     </nav>
