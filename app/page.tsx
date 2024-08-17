@@ -20,7 +20,7 @@ export default async function Home() {
     console.error("Error fetching products:", error);
   }
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-200">
       <div className=" flex">
         <Sidebar />
         <div className="container bg-white mx-auto px-4 py-8 lg:m-2">
