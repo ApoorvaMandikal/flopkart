@@ -3,10 +3,22 @@ import React, { useState } from "react";
 import { IProductCardProps } from "../types/product";
 
 const ProductCard = ({ product, currency }: IProductCardProps) => {
-  const [added, setAdded] = useState(false);
+  const [quantity, setQuantity] = useState(0);
 
-  const handleAddtocart = () => {
-    setAdded(true);
+  const handleAddToCart = () => {
+    setQuantity(1);
+  };
+
+  const handleIncreaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleDecreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    } else {
+      setQuantity(0);
+    }
   };
 
   const formattedPrice = new Intl.NumberFormat("en-IN", {
@@ -26,19 +38,19 @@ const ProductCard = ({ product, currency }: IProductCardProps) => {
           {product.title}
         </h2>
         <p className="text-gray-700">{formattedPrice}</p>
-        {added ? (
+        {quantity > 0 ? (
           <div className="flex items-center mt-4 w-full">
-            <button className="bg-blue-500 text-white py-2 px-4 rounded-l hover:bg-blue-600">
+            <button onClick={handleDecreaseQuantity} className="bg-blue-500 text-white py-2 px-4 rounded-l hover:bg-blue-600">
               -
             </button>
-            <span className="px-4 py-2 w-full text-center">1</span>
-            <button className="bg-blue-500 text-white py-2 px-4 rounded-r hover:bg-blue-600">
+            <span className="px-4 py-2 w-full text-center">{quantity}</span>
+            <button onClick={handleIncreaseQuantity} className="bg-blue-500 text-white py-2 px-4 rounded-r hover:bg-blue-600">
               +
             </button>
           </div>
         ) : (
           <button
-            onClick={handleAddtocart}
+            onClick={handleAddToCart}
             className="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full"
           >
             Add to Cart
