@@ -6,12 +6,7 @@ import { useCart } from "../context/CartContext";
 
 const page = () => {
   const { cartItems, totalPrice } = useCart();
-  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(0);
-
-  const handleAddToCart = () => {
-    setQuantity(1);
-  };
 
   const handleIncreaseQuantity = () => {
     setQuantity(quantity + 1);
@@ -27,14 +22,15 @@ const page = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen flex">
-      <div className="container mx-auto px-4 py-8 flex-grow">
+      <div className="container px-4 flex-grow m-10">
         {cartItems.length === 0 ? (
           <EmptyCart />
         ) : (
           cartItems.map((item, index) => (
+            <div className="flex justify-evenly">
             <div
               key={index}
-              className="bg-white shadow-md rounded-lg overflow-hidden mb-4"
+              className="bg-white shadow-md rounded-lg overflow-hidden mb-4 flex w-3/5 p-9"
             >
               <div className="flex flex-col">
                 <div className="flex flex-row py-4">
@@ -50,14 +46,14 @@ const page = () => {
                     <p className="text-gray-700">{item.price}</p>
                   </div>
                 </div>
-                <div className="flex items-center mt-4">
+                <div className="flex items-center mt-8">
                   <button
                     onClick={handleDecreaseQuantity}
                     className="bg-blue-500 text-white py-2 px-4 rounded-l hover:bg-blue-600"
                   >
                     -
                   </button>
-                  <span className="px-4 py-2 w-full text-center">
+                  <span className="px-4 py-2 text-center">
                     {quantity}
                   </span>
                   <button
@@ -66,8 +62,16 @@ const page = () => {
                   >
                     +
                   </button>
+                  <button className="text-red-800 py-2 px-4">
+                    Remove
+                  </button>
                 </div>
               </div>
+            </div>
+            <div className="bg-white shadow-md rounded-lg overflow-hidden mb-4 w-1/4">
+              <p> Total price</p>
+              <p> {item.price} </p>
+            </div>
             </div>
           ))
         )}
