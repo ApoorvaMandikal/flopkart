@@ -17,17 +17,19 @@ const Navbar = () => {
       className="text-white flex items-center h-14"
       style={{ backgroundColor: "#2874f0" }} // Flipkart signature blue color
     >
-      <div className="flex w-full justify-between items-center lg:mx-28 py-1 px-4">
+      <div className="flex w-full justify-between items-center lg:ml-96 mr-28 py-1 px-4">
+        <div className="flex items-center w-3/6">
         <div className="text-xl italic font-bold pl-4 lg:pl-16 mr-4">
           <Link href="/">Flopkart</Link>
         </div>
-        <div className="flex-grow relative max-w-md">
+        <div className="flex-grow relative">
           <input
             type="text"
             placeholder="Search..."
             className="w-full p-2 border border-gray-600 focus:outline-none focus:border-blue-500"
           />
           <MagnifyingGlassIcon className="absolute text-blue-500 h-6 w-6 right-4 top-2" />
+        </div>
         </div>
         <div className="hidden sm:flex items-center mx-2 lg:mx-4">
           <button className="bg-white text-blue-500 font-bold px-4 py-2 hover:bg-blue-600 hover:text-white w-24 sm:w-28 lg:w-32 h-8 flex items-center justify-center">
