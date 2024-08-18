@@ -1,10 +1,10 @@
 "use client"
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { IProduct } from "../types/product";
 
 interface CartContextProps {
   cartItems: IProduct[];
-  addToCart: (product: IProduct) => void;
+  addToCart: (product: IProduct, quantity?:number) => void;
   cartCount: number;
   totalPrice: number;
 }
@@ -14,12 +14,45 @@ const CartContext = createContext<CartContextProps | undefined>(undefined);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<IProduct[]>([]);
 
-  const addToCart = (product: IProduct) => {
-    setCartItems((prevItems) => [...prevItems, product]);
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem("cartItems");
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  const addToCart = (product: IProduct, quantity: number = 1) => {
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.id === product.id);
+  
+      if (existingItem) {
+        const updatedQuantity = (existingItem.quantity || 1) + quantity;
+  
+        if (updatedQuantity <= 0) {
+          return prevItems.filter((item) => item.id !== product.id);
+        } else {
+          return prevItems.map((item) =>
+            item.id === product.id
+              ? { ...item, quantity: updatedQuantity }
+              : item
+          );
+        }
+      } else {
+        return quantity > 0 ? [...prevItems, { ...product, quantity }] : prevItems;
+      }
+    });
   };
 
-  const cartCount = cartItems.length;
-  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+  const cartCount = cartItems.reduce((count, item) => count + (item.quantity || 1), 0);
+  const totalPrice = parseFloat(
+    cartItems
+      .reduce((total, item) => total + item.price * (item.quantity || 1), 0)
+      .toFixed(2)
+  );
 
   return (
     <CartContext.Provider

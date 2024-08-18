@@ -1,27 +1,35 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IProductCardProps } from "../types/product";
 import { useCart } from "../context/CartContext";
 
 const ProductCard = ({ product, currency }: IProductCardProps) => {
-  const { addToCart } = useCart();
+  const { addToCart, cartItems } = useCart();
   const [quantity, setQuantity] = useState(0);
 
+  useEffect(() => {
+    const cartItem = cartItems.find((item) => item.id === product.id);
+    if (cartItem) {
+      setQuantity(cartItem.quantity || 0);
+    }
+  }, [cartItems, product.id]);
+
   const handleAddToCart = () => {
-    addToCart(product);
+    addToCart(product, 1);
     setQuantity(1);
   };
 
   const handleIncreaseQuantity = () => {
-    setQuantity(quantity + 1);
-    addToCart(product);
+    addToCart(product, 1);
   };
 
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
-      setQuantity(quantity - 1);
+      addToCart(product, -1);
     } else {
       setQuantity(0);
+      addToCart(product, -1);
+      
     }
   };
 
@@ -44,11 +52,17 @@ const ProductCard = ({ product, currency }: IProductCardProps) => {
         <p className="text-gray-700">{formattedPrice}</p>
         {quantity > 0 ? (
           <div className="flex items-center mt-4 w-full">
-            <button onClick={handleDecreaseQuantity} className="bg-blue-500 text-white py-2 px-4 rounded-l hover:bg-blue-600">
+            <button
+              onClick={handleDecreaseQuantity}
+              className="bg-blue-500 text-white py-2 px-4 rounded-l hover:bg-blue-600"
+            >
               -
             </button>
             <span className="px-4 py-2 w-full text-center">{quantity}</span>
-            <button onClick={handleIncreaseQuantity} className="bg-blue-500 text-white py-2 px-4 rounded-r hover:bg-blue-600">
+            <button
+              onClick={handleIncreaseQuantity}
+              className="bg-blue-500 text-white py-2 px-4 rounded-r hover:bg-blue-600"
+            >
               +
             </button>
           </div>
