@@ -1,10 +1,16 @@
-"use client"
-import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
+"use client";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 import { IProduct } from "../types/product";
 
 interface CartContextProps {
   cartItems: IProduct[];
-  addToCart: (product: IProduct, quantity?:number) => void;
+  addToCart: (product: IProduct, quantity?: number) => void;
   cartCount: number;
   totalPrice: number;
 }
@@ -22,16 +28,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    if (Array.isArray(cartItems) && cartItems.length > 0) {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
   }, [cartItems]);
 
   const addToCart = (product: IProduct, quantity: number = 1) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
-  
+
       if (existingItem) {
         const updatedQuantity = (existingItem.quantity || 1) + quantity;
-  
+
         if (updatedQuantity <= 0) {
           return prevItems.filter((item) => item.id !== product.id);
         } else {
@@ -42,12 +50,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           );
         }
       } else {
-        return quantity > 0 ? [...prevItems, { ...product, quantity }] : prevItems;
+        return quantity > 0
+          ? [...prevItems, { ...product, quantity }]
+          : prevItems;
       }
     });
   };
 
-  const cartCount = cartItems.reduce((count, item) => count + (item.quantity || 1), 0);
+  const cartCount = cartItems.reduce(
+    (count, item) => count + (item.quantity || 1),
+    0
+  );
   const totalPrice = parseFloat(
     cartItems
       .reduce((total, item) => total + item.price * (item.quantity || 1), 0)
