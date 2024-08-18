@@ -12,7 +12,7 @@ import { IProductCardProps } from '../types/product';
 
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden ">
-      <img src={product.image} alt={product.title} className="w-full h-48 object-cover" />
+      <img src={product.image} alt={product.title} className="w-full h-48 object-contain" />
       <div className="p-4">
         <h2 className="text-lg font-semibold text-black truncate">{product.title}</h2>
         <p className="text-gray-700">{formattedPrice}</p>
