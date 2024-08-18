@@ -2,25 +2,25 @@
 import React, { useState } from "react";
 import EmptyCart from "./EmptyCart";
 import { useCart } from "../context/CartContext";
-import { IProduct, IProductCardProps } from "../types/product";
+import { IProduct } from "../types/product";
 
-const Page = ({ product, currency }: IProductCardProps) => {
+const Page = () => {
   const { cartItems, totalPrice, addToCart } = useCart();
 
   const handleIncreaseQuantity = (product: IProduct) => {
-    addToCart(product,1);
+    addToCart(product, 1);
   };
 
   const handleDecreaseQuantity = (product: IProduct, quantity: number) => {
     if (quantity > 1) {
-      addToCart(product, -1); 
+      addToCart(product, -1);
     } else {
       addToCart(product, -quantity);
     }
   };
 
   const handleRemove = (product: IProduct) => {
-    addToCart(product, -(product.quantity || 1)); 
+    addToCart(product, -(product.quantity || 1));
   };
 
   return (
@@ -48,26 +48,38 @@ const Page = ({ product, currency }: IProductCardProps) => {
                       </div>
                     </div>
                     <div className="flex items-center mt-8">
-                    <button
-                        onClick={() => handleDecreaseQuantity(item, item.quantity)}
+                      <button
+                        onClick={() =>
+                          handleDecreaseQuantity(item, item.quantity)
+                        }
                         className="bg-blue-500 text-white py-2 px-4 rounded-l hover:bg-blue-600"
                       >
                         -
                       </button>
-                      <span className="px-4 py-2 text-center">{item.quantity || 1}</span>
+                      <span className="px-4 py-2 text-center">
+                        {item.quantity || 1}
+                      </span>
                       <button
                         onClick={() => handleIncreaseQuantity(item)}
                         className="bg-blue-500 text-white py-2 px-4 rounded-r hover:bg-blue-600"
                       >
                         +
                       </button>
-                      <button className="text-red-800 py-2 px-4" onClick={() => handleRemove(item)}>Remove</button>
+                      <button
+                        className="text-red-800 py-2 px-4"
+                        onClick={() => handleRemove(item)}
+                      >
+                        Remove
+                      </button>
                     </div>
                   </div>
                 </div>
               ))}
               <div className="flex lg:w-full justify-end shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_-2px_4px_-1px_rgba(0,0,0,0.06)] ">
-                <button className="bg-orange-600 text-white py-5 px-14 my-3 mx-8 "> Place Order </button>
+                <button className="bg-orange-600 text-white py-5 px-14 my-3 mx-8 ">
+                  {" "}
+                  Place Order{" "}
+                </button>
               </div>
             </div>
             <div className="bg-white shadow-md rounded-lg overflow-hidden p-4 my-4 lg:my-0 w-full lg:w-1/4 lg:h-48 ">
