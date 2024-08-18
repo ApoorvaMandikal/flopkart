@@ -2,7 +2,6 @@ import ProductCard from "./components/ProductCard";
 import { IProduct } from "./types/product";
 import Sidebar from "./components/SideBar";
 
-
 export default async function Home() {
   let products: IProduct[] = [];
 
