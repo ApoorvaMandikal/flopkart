@@ -10,7 +10,7 @@ import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const {cartCount} = useCart();
+  const { cartItems } = useCart();
 
   return (
     <nav
@@ -37,21 +37,29 @@ const Navbar = () => {
 
         {pathname !== "/cart" && (
           <>
-        <div className="hidden lg:flex text-base font-semibold space-x-4 mx-2 lg:mx-4">
-          <Link href="/">Become a Seller</Link>
-        </div>
-        <div className="hidden lg:flex items-center text-base font-semibold mx-2 lg:mx-4">
-          <Link href="/">More</Link>
-          <ChevronDownIcon className="text-white h-4 w-4 ml-1" />
-        </div>
-        
-          <div className="sm:flex items-center mx-2 lg:mx-4 text-base font-semibold">
-            <Link href="/cart" className="flex justify-between text-center px-3 py-2">
-              <ShoppingCartIcon className="text-white size-6 py-1" />
-              <p>Cart ({cartCount})</p>
-            </Link>
-          </div>
-        </>
+            <div className="hidden lg:flex text-base font-semibold space-x-4 mx-2 lg:mx-4">
+              <Link href="/">Become a Seller</Link>
+            </div>
+            <div className="hidden lg:flex items-center text-base font-semibold mx-2 lg:mx-4">
+              <Link href="/">More</Link>
+              <ChevronDownIcon className="text-white h-4 w-4 ml-1" />
+            </div>
+
+            <div className="sm:flex items-center mx-2 lg:mx-4 text-base font-semibold">
+              <Link
+                href="/cart"
+                className="flex justify-between text-center px-3 py-2"
+              >
+                <div className=" relative mx-1 px-2 py-1">
+                  <ShoppingCartIcon className="text-white size-6 mx-1" />
+                  <div className=" absolute text-xs bg-red-600 text-white size-4 rounded-2xl right-0 top-0 ">
+                    {cartItems.length}
+                  </div>
+                </div>
+                <p className="items-center py-1">Cart </p>
+              </Link>
+            </div>
+          </>
         )}
       </div>
     </nav>
