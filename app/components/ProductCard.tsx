@@ -1,16 +1,20 @@
 "use client";
 import React, { useState } from "react";
 import { IProductCardProps } from "../types/product";
+import { useCart } from "../context/CartContext";
 
 const ProductCard = ({ product, currency }: IProductCardProps) => {
+  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(0);
 
   const handleAddToCart = () => {
+    addToCart(product);
     setQuantity(1);
   };
 
   const handleIncreaseQuantity = () => {
     setQuantity(quantity + 1);
+    addToCart(product);
   };
 
   const handleDecreaseQuantity = () => {

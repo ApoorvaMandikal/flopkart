@@ -6,14 +6,16 @@ import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/16/solid";
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const {cartCount} = useCart();
 
   return (
     <nav
       className="text-white flex items-center h-14"
-      style={{ backgroundColor: "#2874f0" }}
+      style={{ backgroundColor: "#2874f0" }} // Flipkart signature blue color
     >
       <div className="flex w-full justify-between items-center lg:mx-28 py-1 px-4">
         <div className="text-xl italic font-bold pl-4 lg:pl-16 mr-4">
@@ -46,7 +48,7 @@ const Navbar = () => {
           <div className="sm:flex items-center mx-2 lg:mx-4 text-base font-semibold">
             <Link href="/cart" className="flex justify-between text-center px-3 py-2">
               <ShoppingCartIcon className="text-white size-6 py-1" />
-              <p>Cart</p>
+              <p>Cart ({cartCount})</p>
             </Link>
           </div>
         </>
