@@ -52,9 +52,9 @@ const Page = () => {
                         <img
                           src={item.image}
                           alt={item.title}
-                          className="h-48 object-contain mx-4"
+                          className="h-48 size-48 object-contain mx-4"
                         />
-                        <div className="p-4">
+                        <div className="p-4 overflow-y-auto">
                           <h2 className="text-lg font-semibold text-black truncate">
                             {item.title}
                           </h2>
@@ -102,7 +102,7 @@ const Page = () => {
               <div className="bg-white shadow-md rounded-lg overflow-hidden p-4 my-4 lg:my-0 w-full lg:w-1/4 lg:h-48 ">
                 <h2 className="text-xl font-semibold mb-4">Price Details</h2>
                 <div className="flex justify-between mb-2">
-                  <span className="text-gray-700">Price</span>
+                  <span className="text-gray-700">Price ({cartItems.length} items) </span>
                   <span className="text-gray-900 font-medium">
                     {totalPrice}
                   </span>
