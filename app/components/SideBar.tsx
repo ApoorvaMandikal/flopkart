@@ -2,7 +2,8 @@ import React from "react";
 
 const Sidebar = () => {
   return (
-    <div className="hidden lg:block w-2/4 bg-white p-4 m-2">
+    <div className="hidden lg:block lg:w-1/4 bg-white p-4 my-2 mx-2  ">
+      <div className="max-w-fit">
       <h2 className="text-lg font-semibold mb-4">Filters</h2>
       <div className="mb-6">
         <h3 className="text-sm font-medium mb-2">Categories</h3>
@@ -45,6 +46,7 @@ const Sidebar = () => {
           <li><a href="#" className="text-gray-700 hover:text-blue-600">2★ & above</a></li>
           <li><a href="#" className="text-gray-700 hover:text-blue-600">1★ & above</a></li>
         </ul>
+      </div>
       </div>
     </div>
   );

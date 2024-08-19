@@ -20,7 +20,7 @@ const CategoriesBar = () => {
     <>
       {pathname !== "/cart" && (
         <div className="hidden lg:block bg-white text-black drop-shadow">
-          <div className="flex justify-between items-center px-6 py-2 max-w-6xl mx-auto">
+          <div className="flex justify-between items-center px-6 py-2 lg:max-w-screen-2xl mx-auto">
             {categories.map((category, index) => (
               <div
                 key={index}
