@@ -43,12 +43,12 @@
         - If the number of the product added will be crossing a minimal criteria ie., 3, there will be a discount applied on the said product which will be reflected on the product page.
         - The cart icon on the product listing page will be getting dynamically updated as the user adds the products.
     - The product listing page will have static search bar, filters and side menu to conform to the design of Flipkart.
+    - Error handling added through error component to catch any API errors.
 - **Cart Management**:
     - The cart page will display all selected items, allowing users to modify quantities or remove items. The cart summary will dynamically update based on user actions.
     - The cart page will include a “Checkout” button which will reflect that the order is placed and clearing the data on the cart page.
-    - Discounts will be added of 2 types:
+    - Discounts will be added:
         - A discount will be implied on the cart items if the total price of the cart items exceed a certain limit.
-        - A discount will be added based on the number of products in the cart.
 - **Local Storage for Cart Data**
     - To keep the application simple and efficient, the cart data (items added by the user) will be stored in the browser's local storage. This ensures that the cart persists across page reloads, providing a seamless user experience without the need for backend storage.
 - **Styling with Tailwind CSS**:
