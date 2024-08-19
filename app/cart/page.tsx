@@ -44,11 +44,13 @@ const Page = () => {
           <EmptyCart />
         ) : (
           <>
-            <div className="flex lg:w-full bg-white  p-4 mb-2 text- shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_-2px_4px_-1px_rgba(0,0,0,0.06)] ">
+            
+            <div className="flex justify-evenly flex-col lg:flex-row">
+              <div className="flex flex-col w-full lg:w-3/5">
+            <div className="flex bg-white  p-4 mb-2 text- shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_-2px_4px_-1px_rgba(0,0,0,0.06)] ">
               <span> Add more than 10000 to get 20% off!</span>
             </div>
-            <div className="flex justify-evenly flex-col lg:flex-row">
-              <div className="bg-white shadow-md rounded-lg overflow-hidden w-full lg:w-3/5 border-t">
+              <div className="bg-white shadow-md rounded-lg overflow-hidden w-full border-t">
                 {cartItems.map((item, index) => (
                   <div key={index} className="mb-4 flex p-9 border-t">
                     <div className="flex flex-col w-full">
@@ -102,6 +104,7 @@ const Page = () => {
                     Place Order{" "}
                   </button>
                 </div>
+              </div>
               </div>
               <div className="bg-white shadow-md rounded-lg overflow-hidden p-4 my-4 lg:my-0 w-full lg:w-1/4 lg:h-48 ">
                 <h2 className="text-xl font-semibold mb-4">Price Details</h2>
