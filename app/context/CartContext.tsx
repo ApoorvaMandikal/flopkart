@@ -14,12 +14,15 @@ interface CartContextProps {
   cartCount: number;
   totalPrice: number;
   clearCart: () => void;
+  formatPrice: (priceInUSD: number) => string;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<IProduct[]>([]);
+  const exchangeRate = 82; 
+
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cartItems");
@@ -67,15 +70,27 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     (count, item) => count + (item.quantity || 1),
     0
   );
+
   const totalPrice = parseFloat(
     cartItems
       .reduce((total, item) => total + item.price * (item.quantity || 1), 0)
       .toFixed(2)
   );
 
+
+  const convertToINR = (priceInUSD: number) => priceInUSD * exchangeRate;
+
+  const formatPrice = (priceInUSD: number) => {
+    const priceInINR = convertToINR(priceInUSD);
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+    }).format(priceInINR);
+  };
+
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, cartCount, totalPrice, clearCart }}
+      value={{ cartItems, addToCart, cartCount, totalPrice, clearCart, formatPrice }}
     >
       {children}
     </CartContext.Provider>

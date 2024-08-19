@@ -4,7 +4,7 @@ import { IProductCardProps } from "../types/product";
 import { useCart } from "../context/CartContext";
 
 const ProductCard = ({ product, currency }: IProductCardProps) => {
-  const { addToCart, cartItems } = useCart();
+  const { addToCart, cartItems,formatPrice } = useCart();
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
@@ -33,10 +33,9 @@ const ProductCard = ({ product, currency }: IProductCardProps) => {
     }
   };
 
-  const formattedPrice = new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: currency,
-  }).format(product.price);
+  
+
+  const formattedPrice = formatPrice(product.price);
 
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden ">

@@ -8,9 +8,13 @@ import { IProduct } from "../types/product";
 const Page = () => {
   const router = useRouter();
 
-  const { cartItems, totalPrice, addToCart, clearCart } = useCart();
+  const { cartItems, totalPrice, addToCart, clearCart, formatPrice } = useCart();
+
+  const productinINR = formatPrice(totalPrice)
   const discount = (20 / 100) * totalPrice;
-  const discPrice = (totalPrice - discount).toFixed(2);
+  const discountinINR = formatPrice(discount)
+  const discPrice = (totalPrice - discount);
+  const discountedPriceInINR = formatPrice(discPrice);
 
   const handleIncreaseQuantity = (product: IProduct) => {
     addToCart(product, 1);
@@ -41,7 +45,7 @@ const Page = () => {
         ) : (
           <>
             <div className="flex lg:w-full bg-white  p-4 mb-2 text- shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_-2px_4px_-1px_rgba(0,0,0,0.06)] ">
-              <span> Add more than 300 to get 20% off!</span>
+              <span> Add more than 10000 to get 20% off!</span>
             </div>
             <div className="flex justify-evenly flex-col lg:flex-row">
               <div className="bg-white shadow-md rounded-lg overflow-hidden w-full lg:w-3/5 border-t">
@@ -58,7 +62,7 @@ const Page = () => {
                           <h2 className="text-lg font-semibold text-black truncate">
                             {item.title}
                           </h2>
-                          <p className="text-gray-700">{item.price}</p>
+                          <p className="text-gray-700">{formatPrice(item.price)}</p>
                         </div>
                       </div>
                       <div className="flex items-center mt-8">
@@ -104,7 +108,7 @@ const Page = () => {
                 <div className="flex justify-between mb-2">
                   <span className="text-gray-700">Price ({cartItems.length} items) </span>
                   <span className="text-gray-900 font-medium">
-                    {totalPrice}
+                    {productinINR}
                   </span>
                 </div>
                 {totalPrice > 300 ? (
@@ -112,7 +116,7 @@ const Page = () => {
                     <div className="flex justify-between mb-2">
                       <span className="text-gray-700">Discount</span>
                       <span className="text-gray-900 font-medium">
-                        {discount}
+                        {discountinINR}
                       </span>
                     </div>{" "}
                     <div className="border-t mt-4 pt-4 flex justify-between">
@@ -120,7 +124,7 @@ const Page = () => {
                         Total Amount
                       </span>
                       <span className="text-lg font-semibold text-gray-900">
-                        {discPrice}
+                        {discountedPriceInINR}
                       </span>
                     </div>{" "}
                   </>
@@ -128,7 +132,7 @@ const Page = () => {
                   <div className="border-t mt-4 pt-4 flex justify-between">
                     <span className="text-lg font-semibold">Total Amount</span>
                     <span className="text-lg font-semibold text-gray-900">
-                      {totalPrice}
+                      {productinINR}
                     </span>
                   </div>
                 )}
