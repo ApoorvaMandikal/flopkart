@@ -17,7 +17,8 @@ const Navbar = () => {
       className="text-white flex items-center h-14"
       style={{ backgroundColor: "#2874f0" }} // Flipkart signature blue color
     >
-      <div className="flex w-full justify-between items-center lg:ml-96 mr-28 py-1 px-4">
+      <div className="lg:w-1/5"></div>
+      <div className="flex w-full justify-evenly lg:justify-between items-center lg:mr-28 py-1 px-4">
         <div className="flex items-center w-3/6">
         <div className="text-xl italic font-bold pl-4 lg:pl-16 mr-4">
           <Link href="/">Flopkart</Link>
