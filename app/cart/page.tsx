@@ -1,11 +1,14 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import EmptyCart from "./EmptyCart";
 import { useCart } from "../context/CartContext";
 import { IProduct } from "../types/product";
 
 const Page = () => {
-  const { cartItems, totalPrice, addToCart } = useCart();
+  const router = useRouter();
+
+  const { cartItems, totalPrice, addToCart, clearCart } = useCart();
   const discount = (20 / 100) * totalPrice;
   const discPrice = (totalPrice - discount).toFixed(2);
 
@@ -23,6 +26,11 @@ const Page = () => {
 
   const handleRemove = (product: IProduct) => {
     addToCart(product, -(product.quantity || 1));
+  };
+
+  const handlePlaceOrder = () => {
+    clearCart();
+    router.push("/orderplaced");
   };
 
   return (
@@ -82,7 +90,10 @@ const Page = () => {
                   </div>
                 ))}
                 <div className="flex lg:w-full justify-end shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1),0_-2px_4px_-1px_rgba(0,0,0,0.06)] ">
-                  <button className="bg-orange-600 text-white py-5 px-14 my-3 mx-8 ">
+                  <button
+                    className="bg-orange-600 text-white py-5 px-14 my-3 mx-8 "
+                    onClick={handlePlaceOrder}
+                  >
                     {" "}
                     Place Order{" "}
                   </button>

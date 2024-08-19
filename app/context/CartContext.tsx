@@ -13,6 +13,7 @@ interface CartContextProps {
   addToCart: (product: IProduct, quantity?: number) => void;
   cartCount: number;
   totalPrice: number;
+  clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextProps | undefined>(undefined);
@@ -32,6 +33,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }
   }, [cartItems]);
+
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem('cartItems');
+  };
 
   const addToCart = (product: IProduct, quantity: number = 1) => {
     setCartItems((prevItems) => {
@@ -69,7 +75,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, cartCount, totalPrice }}
+      value={{ cartItems, addToCart, cartCount, totalPrice, clearCart }}
     >
       {children}
     </CartContext.Provider>
